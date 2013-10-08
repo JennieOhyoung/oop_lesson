@@ -4,8 +4,8 @@ import pyglet
 from pyglet.window import key
 from core import GameElement
 
-SCREEN_X = 800
-SCREEN_Y = 700
+SCREEN_X = 1000
+SCREEN_Y = 900
 
 game_window = pyglet.window.Window(SCREEN_X, SCREEN_Y)
 
@@ -123,24 +123,24 @@ class Board(object):
                 y_px + self.offset_y)
         sprite.draw()
 
-    def check_bounds(self, x, y):
-        if not (0 <= x < self.width):
-            raise IndexError("%r is out of bounds of the board width: %d"%(x, self.width))
-        if not (0 <= y < self.height):
-            raise IndexError("%r is out of bounds of the board height: %d"%(y, self.width))
+    # def check_bounds(self, x, y):
+    #     if not (0 <= x < self.width):
+    #         # raise IndexError("%r is out of bounds of the board width: %d"%(x, self.width))
+    #     if not (0 <= y < self.height):
+    #         # raise IndexError("%r is out of bounds of the board height: %d"%(y, self.width))
 
     def get_el(self, x, y):
-        self.check_bounds(x, y)
+        # self.check_bounds(x, y)
         return self.content_layer[y][x]
 
     def set_el(self, x, y, el):
-        self.check_bounds(x, y)
+        # self.check_bounds(x, y)
         el.x = x
         el.y = y
         self.content_layer[y][x] = el
 
     def del_el(self, x, y):
-        self.check_bounds(x, y)
+        # self.check_bounds(x, y)
         self.content_layer[y][x] = None
 
     def register(self, el):

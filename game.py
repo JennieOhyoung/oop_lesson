@@ -14,24 +14,32 @@ KEYBOARD = None
 PLAYER = None
 ######################
 
-GAME_WIDTH = 5
-GAME_HEIGHT = 5
+GAME_WIDTH = 8
+GAME_HEIGHT = 8
 
 #### Put class definitions here ####
 class Rock(GameElement):
     IMAGE = "Rock"
     SOLID = True
+    INTERACTIVE = False
 
 class Green_gem(GameElement):
     IMAGE = "GreenGem"
     SOLID = False
+    INTERACTIVE = False
 
     def interact(self, player):
         player.inventory.append(self)
         GAME_BOARD.draw_msg("Woo! A gem! You have %d items!"%(len(player.inventory)))
 
+class Horn_girl(GameElement):
+    IMAGE = "Horns"
+    SOLID = True
+    INTERACTIVE = True
+
+
 class Character(GameElement):
-    IMAGE = "Princess"
+    IMAGE = "Cat"
 
     def __init__(self):
         GameElement.__init__(self)
@@ -39,14 +47,31 @@ class Character(GameElement):
 
     def next_pos(self, direction):
         if direction == "up":
-            return (self.x, self.y-1)
+            if self.y == 0:
+                return (self.x, self.y + (GAME_HEIGHT-1))
+            else:
+                return (self.x, self.y - 1)
+            
         elif direction == "down":
-            return (self.x, self.y+1)
+            if self.y == 7:
+                return (self.x, self.y - (GAME_HEIGHT-1))
+            else: 
+                return (self.x, self.y + 1)
+
         elif direction == "left":
-            return (self.x-1, self.y)
+            if self.x == 0:
+                return (self.x + (GAME_WIDTH-1), self.y)
+            else:
+                return (self.x - 1, self.y)
+        
         elif direction == "right":
-            return (self.x+1, self.y)
+            if self.x == 7:
+                return (self.x - (GAME_WIDTH-1), self.y)
+            else:
+                return (self.x + 1, self.y)
+
         return None
+
 
 
 
@@ -56,10 +81,11 @@ def initialize():
     """Put game initialization code here"""
 
     rock_positions = [
-            (2, 1),
-            (1, 2),
-            (3, 2),
-            (2, 3)
+            (5, 0),
+            (5, 1),
+            (5, 2),
+            (6, 2), 
+            (7, 2)
         ]  
     rocks = []
 
@@ -69,7 +95,7 @@ def initialize():
         GAME_BOARD.set_el(pos[0], pos[1], rock)
         rocks.append(rock)
 
-    rocks[-1].SOLID = False
+    #rocks[-1].SOLID = False
 
     global PLAYER
     PLAYER = Character()
@@ -81,8 +107,11 @@ def initialize():
 
     gem = Green_gem()
     GAME_BOARD.register(gem)
-    GAME_BOARD.set_el(3,1,gem)
+    GAME_BOARD.set_el(6, 1, gem)
 
+    horn = Horn_girl()
+    GAME_BOARD.register(horn)
+    GAME_BOARD.set_el(2, 6, horn)
 
 def keyboard_handler():
     direction = None
@@ -127,10 +156,21 @@ def keyboard_handler():
 
         if existing_el:
             existing_el.interact(PLAYER)
+        
+        if existing_el and existing_el.INTERACTIVE:
+                GAME_BOARD.draw_msg("Hi, I'm Horn Girl.")
 
         if existing_el is None or not existing_el.SOLID:
             GAME_BOARD.del_el(PLAYER.x, PLAYER.y)
             GAME_BOARD.set_el(next_x, next_y, PLAYER)
+
+        # GAME_BOARD.draw_msg("This game is going to teach us about class!")
+        # if existing_el.INTERACTIVE:
+        #     print "Hello there, my name is Horn Girl."
+
+# def portal_pos(self):
+#     PLAYER.del_el(PLAYER.x, PLAYER.y)
+#     return PLAYER.set_el(7, 0, PLAYER)
 
 
     # green_gem1 = Green_gem()
