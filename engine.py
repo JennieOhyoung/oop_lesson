@@ -4,8 +4,8 @@ import pyglet
 from pyglet.window import key
 from core import GameElement
 
-SCREEN_X = 1000
-SCREEN_Y = 900
+SCREEN_X = 1700
+SCREEN_Y = 1000
 
 game_window = pyglet.window.Window(SCREEN_X, SCREEN_Y)
 
@@ -40,7 +40,18 @@ def setup_images():
             "Cat": "Character Cat Girl.png",
             "Horns": "Character Horn Girl.png",
             "Girl": "Character Pink Girl.png",
-            "Princess": "Character Princess Girl.png"
+            "Princess": "Character Princess Girl.png",
+            "BC": "Balloonicorn.png",
+            "C": "C.png",
+            "Chris": "Chris.png",
+            "Cucumber": "Cucumber.png",
+            "Dart": "Dart.png",
+            "Haskell": "Haskell.png",
+            "Java": "Java.png",
+            "Liz": "Liz.png",
+            "Python": "Python.png",
+            "Ruby": "Ruby.png",
+            "Scala": "Scala.png"
             }
 
     for k,v in filenames.items():
