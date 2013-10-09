@@ -60,6 +60,19 @@ class Fast_lan(GameElement):
             GAME_BOARD.del_el(self.x, self.y)
             GAME_BOARD.set_el(self.x, 0, self)
 
+# class Superfast_lan(GameElement):
+#     IMAGE = "Cucumber"
+#     SOLID = True
+#     INTERACTIVE = True
+
+#     def move_lan(self):
+#         if self.y < GAME_HEIGHT - 4:
+#             GAME_BOARD.del_el(self.x, self.y)
+#             GAME_BOARD.set_el(self.x, self.y + 3, self)
+#         else:
+#             GAME_BOARD.del_el(self.x, self.y)
+#             GAME_BOARD.set_el(self.x, 0, self)
+
 class Balloonicorn(GameElement):
     IMAGE = "BC"
     SOLID = True
@@ -197,7 +210,17 @@ def initialize():
     GAME_BOARD.set_el(4, 5, haskell1)
     GAME_BOARD.BAD_GUYS.append(haskell1)
 
-# rock column
+    jennie = Fast_lan()
+    jennie.IMAGE = "Jennie"
+    GAME_BOARD.register(jennie)
+    GAME_BOARD.set_el(13, 4, jennie)
+    GAME_BOARD.BAD_GUYS.append(jennie)
+
+    jordyn = Slow_lan()
+    jordyn.IMAGE = "Jordyn"
+    GAME_BOARD.register(jordyn)
+    GAME_BOARD.set_el(12, 6, jordyn)
+    GAME_BOARD.BAD_GUYS.append(jordyn) 
 
     java1 = Slow_lan()
     java1.IMAGE = "Java"

@@ -51,7 +51,9 @@ def setup_images():
             "Liz": "Liz.png",
             "Python": "Python.png",
             "Ruby": "Ruby.png",
-            "Scala": "Scala.png"
+            "Scala": "Scala.png",
+            "Jennie": "Jennie.png",
+            "Jordyn": "Jordyn.png"
             }
 
     for k,v in filenames.items():
