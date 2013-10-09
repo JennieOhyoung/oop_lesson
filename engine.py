@@ -65,6 +65,8 @@ def setup_images():
     TILE_HEIGHT = i.height
 
 class Board(object):
+    BAD_GUYS = []
+
     def __init__(self, width = 3, height = 3):
         self.width = width
         self.height = height
@@ -231,6 +233,16 @@ def run():
     game.KEYBOARD = key_handler
     game_window.push_handlers(key_handler)
 
+
+    try:
+        badguy_handler = game.badguy_handler
+        def badguy_handler_wrapper(dt):
+            badguy_handler()
+        pyglet.clock.schedule_interval(badguy_handler_wrapper, 1/4.0)
+    except AttributeError:
+        print "No badguy handler"
+        pass
+
     try:
         handler = game.keyboard_handler
         def handler_wrapper(dt):
@@ -241,7 +253,7 @@ def run():
         pass
         
     # Set up the update clock
-    pyglet.clock.schedule_interval(update, 1/10.)
+    pyglet.clock.schedule_interval(update, 1/10.0)
     game.initialize()
     pyglet.app.run()
 
